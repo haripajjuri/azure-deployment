@@ -40,10 +40,10 @@ jobs:
         run: |
           mkdir -p .next/standalone/public
           cp -r public/* .next/standalone/public
+          ls .next
           
       - name: Copy static folder
         run: |
-          mkdir -p .next/standalone/.next/static
           mv .next/static .next/standalone/.next/
         
       - name: Zip artifact for deployment
