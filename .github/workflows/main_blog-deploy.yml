@@ -23,12 +23,20 @@ jobs:
         with:
           node-version: '20.x'
 
-      - name: npm install, build, and test
+      - name: installing packages
         run: |
           npm install
-          npm run build --if-present
-          npm run test --if-present
 
+      - name: generate prisma client
+        run: |
+          npx prisma generate
+
+      - name: Build the application
+        run: |
+          npm run build
+          mv .next/static .next/standalone/.next/static
+          mv public .next/standalone/public
+        
       - name: Zip artifact for deployment
         run: zip release.zip ./* -r
 
